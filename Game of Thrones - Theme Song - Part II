@@ -1,0 +1,236 @@
+### Game of Thrones - Theme Song - Part II
+
+define :ch1 do |n,l|
+  play n, release: 1.2*l,  amp: 2
+  sleep l
+end
+
+define :ch2 do |n1, n2 ,l|
+  play_chord [n1,n2], release: 1.2*l, amp: 2
+  sleep l
+end
+define :ch3 do |n1, n2, n3 ,l|
+  play_chord [n1,n2,n3], release: 1.2*l,  amp: 2
+  sleep l
+end
+define :ch4 do |n1, n2, n3, n4 ,l|
+  play_chord [n1,n2,n3,n4], release: 1.2*l,  amp: 2
+  sleep l
+end
+
+define :ch232 do |n11,n12,l1, n21,n22,n23,l2, n31,n32,l3|
+  ch2 n11, n12, l1
+  ch3 n21, n22, n23, l2
+  ch2 n31, n32, l3
+end
+
+define :ch2_7 do |n11,n12,l1, n21,n22,l2, n31,n32,l3, n41,n42,l4, n51,n52,l5, n61,n62,l6, n71,n72,l7|
+  ch2 n11,n12,l1
+  ch2 n21,n22,l2
+  ch2 n31,n32,l3
+  ch2 n41,n42,l4
+  ch2 n51,n52,l5
+  ch2 n61,n62,l6
+  ch2 n71,n72,l7
+end
+
+
+define :bass do |n|
+  play n, amp: 2, release: 1
+  sleep 1.5
+end
+
+define :bassloop do |n,l|
+  l.times do
+    bass n
+  end
+end
+use_bpm 80
+ live_loop :GOT2 do
+  in_thread do
+    ################## Melody ########################
+    in_thread do
+      with_fx :reverb do
+        use_synth :pulse
+
+        ## Page 3
+        # Bar 33
+        ch2 :D5,:Bf4, 2
+        sleep 0.5
+        play_pattern_timed [:D4,:Ef4,:D4,:C4],[0.125,0.125,0.125,0.125], amp: 0.5
+        play_pattern_timed [:D4,:G4,:G4,:Bf4,:C5,:D5],[0.5,0.75,0.25,0.5,0.5,0.5]
+        ch2 :D5,:F5, 1.5
+        ch2 :Bf4,:F4,1.5
+
+        # Bar 36
+        ch2_7 :Ef5,:C5, 0.25, :D5,:Bf4,0.25, :F5,:D5, 1, :Bf4,:F4, 1.5, :Ef5,:C5, 0.25, :D5,:Bf4, 0.25, :C5,:Af4, 2.5
+        sleep 3
+
+        # Bar 39
+        ch2 :G5,:Ef5, 1.5
+        ch2 :C5,:G4, 1.5
+        ch2_7 :Ef5,:C5, 0.25, :F5,:D5, 0.25, :G5,:Ef5, 1, :C5,:G4, 1,  :Ef5,:C5,0.25, :F5,:D5,0.25, :D5,:Bf4, 2
+
+        sleep 0.5
+        ch1 :G4, 0.5 #??? Af4
+        # Bar 42 - 45
+        ch1 :G4, 2
+        sleep 0.5
+        ch1 :Bf4, 0.25
+        ch1 :Ef5, 0.25
+        ch2_7 :F5,:D5, 1.5, :Bf4,:F4,1.5, :D5,:Bf4, 1, :Ef5,:C5,0.5, :D5,:Bf4,1,  :Bf4,:F4, 0.5,  :C5,:G4, 2
+        sleep 4
+        ch2 :C6,:C5, 0.5
+        play_pattern_timed [:Ef4,:Af4,:Bf4,:C5,:Ef4,:Af4,:C5],[0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        ch2 :Bf5,:Bf4,0.5
+        play_pattern_timed [:Ef4,:G4,:Af4,:Bf4,:Ef4,:G4,:Bf4],[0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+
+        ## Page 4
+        # Bar 49
+        ch2 :Af5,:Af4, 0.5
+        play_pattern_timed [:C4,:F4,:G4,:Af4,:C4,:F4,:Af4],[0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        ch2 :G5,:G4, 0.5
+        play_pattern_timed [:C5,:Ef5,:F5,:G5,:C5,:Ef5,:F5],[0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        ch3 :Af5,:C5,:Af4, 1
+        play_pattern_timed [:C5,:D5,:Ef5,:Af5,:D5,:Ef5],[0.25,0.25,0.5,0.5,0.25,0.25]
+
+        # Bar 52
+        ch4 :Ef6,:Bf5,:G5,:Ef5, 1.5
+        ch4 :F6,:C6,:Af5,:F5, 1.5
+        ch4 :G6,:Ef6,:C6,:G5, 3
+
+        sleep 3
+
+        # Bar 55
+        ch2 :C6,:C5, 0.5
+        play_pattern_timed [:Ef4,:Af4,:Bf4,:C5,:Ef4,:Af4,:C5],[0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        ch2 :Bf5,:Bf4, 0.5
+        play_pattern_timed [:Ef4,:G4,:Af4,:Bf4,:Ef4,:G4,:Bf4],[0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        ch2 :Af5,:Af4, 0.5
+        play_pattern_timed [:C4,:F4,:G4,:Af4,:C4,:F4,:Af4],[0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        ch2 :G5,:G4, 0.5
+        play_pattern_timed [:C5,:Ef5,:F5,:G5,:C5,:Ef5,:F5],[0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        ch3 :Af5,:C5,:Af4, 1  # Bar 59
+        play_pattern_timed [:C5,:D5,:Ef5,:Af5,:D5,:Ef5],[0.25,0.25,0.5,0.5,0.25,0.25]
+        ch4 :Ef6,:C6,:Af5,:Ef5,1
+        sleep 0.25
+        ch1 :F5, 0.25
+        ch3 :D6,:A5,:F5, 0.5
+        ch3 :Ds6,:Bf5,:F5, 0.75
+        ch3 :Df6,:Bf5,:F5, 0.25
+        ch4 :C6,:G5,:Ef5,:C5,0.5
+        play_pattern_timed [:G3,:Af3,:Bf3,:C3,:G3,:Af3,:Bf3,:C4,:G3,:Af3],[0.5,0.25,0.25,0.5,0.5,0.25,0.25,0.5,0.5,0.25]
+        play :Bf3, attack: 1, sustain: 2.5, release: 1.25
+        sleep 4.75
+        # Bar 63
+        play_pattern_timed [:C6,:G5,:Af5,:Bf5,:C6,:G5,:Af5,:Bf5,:C6,:G5,:Af5],[0.5,0.5,0.25,0.25,0.5,0.5,0.25,0.25,0.5,0.5,0.25]
+        play :Bf5, attack: 1, sustain: 2.5, release: 1.25
+        sleep 4.75
+        play_chord [:C6,:G5,:Ef5,:C5], attack: 0.8, release: 2
+
+      end
+    end
+
+    ################## Bass1 ########################
+    in_thread do
+      with_fx :compressor do
+        use_synth :beep
+
+        ## Page 3
+        # Bar 33-34
+        2.times do
+          play :G2, release: 0.5
+          play_pattern_timed [:D3,:G1,:Bf2,:C3,:D3,:G2,:Bf2,:C3],[0.5,0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        end
+        # Bar 35-36
+        2.times do
+          play :Bf2, release: 0.5
+          play_pattern_timed [:F3,:Bf1,:D3,:Ef3,:F3,:Bf2,:D3,:Ef3],[0.5,0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        end
+        # Bar 37-38
+        play_pattern_timed [:C3,:F1,:Af2,:Bf2,:C3,:F2,:Af2,:Bf2],[0.5,0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        play_pattern_timed [:C3,:F1,:Af2,:Bf2,:C3,:F2,:Af2,:Bf2],[0.5,0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        # Bar 39-40
+        2.times do
+          play :C3, release: 0.5
+          play_pattern_timed [:G3,:C2,:Ef3,:F3,:G3,:C3,:Ef3,:F3],[0.5,0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        end
+        # Bar 41-42
+        2.times do
+          play :G2, release: 0.5
+          play_pattern_timed [:D3,:G1,:Bf2,:C3,:D3,:G2,:Bf2,:C3],[0.5,0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        end
+
+        # Bar 43-44
+        2.times do
+          play :Bf2, release: 0.5
+          play_pattern_timed [:F3,:Bf1,:D3,:Ef3,:F3,:Bf2,:D3,:Ef3],[0.5,0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        end
+
+        # Bar 45-46
+        play_pattern_timed [:C3,:F1,:Af2,:Bf2,:C3,:F2,:Af2,:Bf2],[0.5,0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        play_pattern_timed [:C3,:F1,:Af2,:Bf2,:C3,:F2,:Af2,:Bf2],[0.5,0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+
+        ch232 :Af2,:Af1, 1.5, :C4,:Af3,:Ef3, 1, :Af2,:Af1, 0.5     # Bar 47
+        ch232 :Ef2,:Ef1, 1.5, :G3,:Ef3,:Bf2, 1,  :Ef2,:Ef1, 0.5    # Bar 48
+
+        # Page 4
+        ch232 :F2,:F1,1.5, :Af3,:F3,:C3, 1,  :F2,:F1, 0.5         # Bar 49
+        ch232 :C2,:C1, 1.5, :Ef4,:C4,:G3, 1, :C2,:C1, 0.5       # Bar 50
+        ch232 :Af2,:Af1, 1.5, :C4,:Af3,:Ef3, 1, :Af2,:Af1, 0.5    # Bar 51
+
+        # Bar 52
+        play_pattern_timed [:Bf3,:G3,:F3,:Ef3,:Bf2,:Ef2],[0.25,0.25,0.25,0.25,0.25,0.25]
+        play_pattern_timed [:C4,:Af3,:G3,:F3,:C3,:F2],[0.25,0.25,0.25,0.25,0.25,0.25]
+
+        # Bar 53-54
+        2.times do
+          play :C3, release: 0.5
+          play_pattern_timed [:G3,:C2,:Ef3,:F3,:G3,:C3,:Ef3,:F3],[0.5,0.5,0.25,0.25,0.5,0.5,0.25,0.25]
+        end
+
+        ch232 :Af2,:Af1, 1.5, :C4,:Af3,:Ef3, 1, :Af2,:Af1, 0.5 # Bar 55/47
+        ch232 :Ef2,:Ef1, 1.5, :G3,:Ef3,:Bf2, 1, :Ef2,:Ef1, 0.5 # Bar 56/48
+        ch232 :F2,:F1, 1.5, :Af3,:F3,:C3, 1,  :F2,:F1, 0.5  # Bar 57/49
+        ch232 :C2,:C1,1.5, :Ef4,:C4,:G3, 1, :C2,:C1, 0.5  # Bar 58/50
+        ch232 :Af2,:Af1, 1.5, :C4,:Af3,:Ef3, 1, :Af2,:Af1,0.5 # Bar 59/51
+        ch232 :Af2,:Af1, 0.75, :C4,:Af3,:Ef3, 0.75, :G2,:G1, 0.75    # Bar 60
+        ch3 :A4,:G3,:D3, 0.75
+
+        # Bar 61 - 62
+        ch2 :C2,:C1, 0.5
+        play_pattern_timed [:G2,:Ef3,:F3,:G3,:C3,:Ef3,:F3,:G3,:C3,:Ef3],[0.5,0.25,0.25,0.5,0.5,0.25,0.25,0.5,0.5,0.25]
+        play :F3, attack: 1, sustain: 1.5, release: 1.25
+        sleep 3.75
+        play_chord [:C2,:C1], release: 6, amp: 2
+      end
+    end
+
+    ################## Bass2 ########################
+    in_thread do
+      with_fx :reverb do
+        with_fx :echo do
+          use_synth :beep
+
+          ## Page 3
+          bassloop :D3,4 # Bar 33-34 # Bar 41-42
+          bassloop :F3,4 # Bar 35-36 # Bar 43-44
+          bassloop :C3,4 # Bar 37-38 # Bar 45-46
+          bassloop :G3,4 # Bar 39-40
+          bassloop :D3,4 # Bar 33-34 # Bar 41-42
+          bassloop :F3,4 # Bar 35-36 # Bar 43-44
+          bassloop :C3,4 # Bar 37-38 # Bar 45-46
+
+          # Bar 47-48
+          ch232 :Ef2,:Ef1, 1.5, :G3,:Ef3,:Bf2, 1, :Ef2,:Ef1, 0.5
+          ## Page 4
+          sleep 12 # Bar 49-52
+
+          bassloop :G4,4 # Bar 53-54
+        end
+      end
+    end
+  end
+  
+  sleep 120
+end
